@@ -34,6 +34,18 @@ var io, load, exec, join, loadRemote;
             });
         }
         
+        Spero.copy  = function(from, to, files) {
+            Progress.copy(from, to, files);
+        };
+        
+        Spero.abort = function() {
+            Progress.abort();
+        };
+        
+        Spero.pause = function() {
+            Progress.pause();
+        };
+        
         function loadAll(prefix, callback) {
             var scripts = [];
             
@@ -166,6 +178,10 @@ var io, load, exec, join, loadRemote;
             
             this.abort       = function() {
                 socket.emit('abort');
+            };
+            
+            this.copy       = function(from, to, files) {
+                socket.emit('copy', from, to, files);
             };
             
             function getHost() {
