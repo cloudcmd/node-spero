@@ -1,4 +1,4 @@
-var io, load, exec, join;
+var io, load, exec, join, loadRemote;
 
 (function(global) {
     'use strict';
@@ -72,16 +72,19 @@ var io, load, exec, join;
                     });
                 },
                 
-                function() {
+                function(callback) {
+                    loadRemote.setPrefix(prefix)
+                        .load('socket', {
+                            name : 'io',
+                            noPrefix: true
+                        }, callback);
+                },
+                
+                function(callback) {
                     var load    = window.load,
                         css     = prefix + '/css/style.css';
                     
-                    load.json(prefix + '/modules.json', function(error, remote) {
-                        if (error)
-                            console.error(error);
-                        else
-                            load.series(remote.concat(css), callback);
-                    });
+                    load.css(css, callback);
                 },
                 
                 function() {
