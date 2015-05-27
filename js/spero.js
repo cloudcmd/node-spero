@@ -1,4 +1,4 @@
-var io, load, execon, join;
+var io, load, exec, join;
 
 (function(global) {
     'use strict';
@@ -37,8 +37,8 @@ var io, load, execon, join;
         function loadAll(prefix, callback) {
             var scripts = [];
             
-            if (!execon)
-                scripts.push('/modules/execon/lib/execon.js');
+            if (!exec)
+                scripts.push('/modules/execon/lib/exec.js');
             
             if (!scripts.length)
                 loadFiles(prefix, callback);
@@ -51,19 +51,17 @@ var io, load, execon, join;
         }
         
         function loadFiles(prefix, callback) {
-            var exec = execon;
-            
             exec.series([
                 function(callback) {
                     var scripts = [
-                        'js/loadremote.js'
+                        '/js/loadremote.js'
                     ];
                     
                     if (!load)
-                        scripts.push('modules/load/load.js');
+                        scripts.push('/modules/load/load.js');
                     
                     if (!join)
-                        scripts.push('join/join.js');
+                        scripts.push('/join/join.js');
                     
                     scripts = scripts.map(function(name) {
                         return prefix + name;
