@@ -1,3 +1,11 @@
+2015.05.28, v0.5.0
+
+feature:
+- (html) rm
+- (css) rm
+- (spero) add emitify
+
+
 2015.05.27, v0.4.0
 
 fix:
