@@ -8,7 +8,50 @@ File copy emitter middleware based on [socket.io](http://socket.io "Socket.io") 
 npm i spero --save
 ```
 
-## How to use?
+## Client
+
+Could be loaded from url `/spero/spero.js`.
+
+```js
+var prefix = 'spero';
+
+/* could be one argument: callback */
+spero(prefix, function() {
+    var from        = '/',
+        to          = '/tmp',
+        names       = [
+            'bin'
+        ],
+        progress    = function(value) {
+            console.log('progress:', value);
+        },
+        
+        end     = function() {
+            console.log('end');
+            spero.removeListener('progress', progress);
+            spero.removeListener('end', end);
+        },
+    
+    error   = function(data) {
+        var msg = data + '\n Continue?',
+            is = confirm(msg);
+        
+        if (is)
+            spero.continue();
+        else
+            spero.abort();
+    };
+    
+    spero(from, to, names);
+    
+    spero.on('progress', progress);
+    spero.on('end', end);
+    spero.on('error', error);
+});
+
+```
+
+## Server
 
 ```js
 var spero       = require('spero'),
@@ -27,9 +70,13 @@ app.use(spero({
 });
 
 spero.listen(socket, {
-    prefix: 'spero', /* default             */
-    root: '/',      /* string or function   */
+    prefix: 'spero', /* default              */
+    root: '/',       /* string or function   */
 });
+```
+
+```js
+
 ```
 
 ## License
