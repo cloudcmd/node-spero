@@ -1,3 +1,11 @@
+2015.05.28, v1.0.0
+
+feature:
+- (package) description: web progress bar -> file copy emitter middleware
+- (bower) homepage: cloudcmd -> node-spero
+- (spero) add root
+
+
 2015.05.28, v0.5.0
 
 feature:
