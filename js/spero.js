@@ -1,4 +1,4 @@
-var io, load, exec, join, loadRemote;
+var io, load, exec, join, Emitify, loadRemote;
 
 (function(global) {
     'use strict';
@@ -11,23 +11,15 @@ var io, load, exec, join, loadRemote;
     function SperoProto() {
         var Progress;
         
-        function Spero(element, prefix, callback) {
-            var el,
-                type        = typeof element,
-                isString    = type === 'string';
-            
+        function Spero(prefix, callback) {
             if (!callback) {
                 callback    = prefix;
                 prefix      = '/spero';
             }
             
-            if (isString)
-                el  = document.querySelector(element);
-            else
-                el  = element;
-            
             loadAll(prefix, function() {
-                Progress = new ProgressProto(prefix);
+                Progress                = new ProgressProto(prefix);
+                Object.setPrototypeOf(Spero, new Emitify());
                 
                 if (typeof callback === 'function')
                     callback();
@@ -75,6 +67,9 @@ var io, load, exec, join, loadRemote;
                     if (!join)
                         scripts.push('/join/join.js');
                     
+                    if (!Emitify)
+                        scripts.push('/modules/emitify/lib/emitify.js');
+                    
                     scripts = scripts.map(function(name) {
                         return prefix + name;
                     });
@@ -90,13 +85,6 @@ var io, load, exec, join, loadRemote;
                             name : 'io',
                             noPrefix: true
                         }, callback);
-                },
-                
-                function(callback) {
-                    var load    = window.load,
-                        css     = prefix + '/css/style.css';
-                    
-                    load.css(css, callback);
                 },
                 
                 function() {
@@ -116,13 +104,13 @@ var io, load, exec, join, loadRemote;
             
             srcs.forEach(function(src) {
                 var element = document.createElement('script');
-            
+                
                 element.src = src;
                 element.addEventListener('load', function load() {
                     func();
                     element.removeEventListener('load', load);
                 });
-            
+                
                 document.body.appendChild(element);
             });
         }
@@ -141,34 +129,28 @@ var io, load, exec, join, loadRemote;
                     'reconnection limit'        : FIVE_SECONDS
                 });
                 
-                socket.on('err', function(data) {
-                    var msg = data + '\n Continue?',
-                        is = confirm(msg);
-                    
-                    if (is)
-                        socket.emit('continue');
-                    else
-                        socket.emit('abort');
+                socket.on('err', function(error) {
+                    Spero.emit('error', error);
                 });
                 
                 socket.on('file', function(name) {
-                    console.log(name);
+                    Spero.emit('file', name);
                 });
                 
                 socket.on('progress', function(percent) {
-                    console.log(percent);
+                    Spero.emit('progress', percent);
                 });
                 
                 socket.on('end', function() {
-                    console.log('copy ended up');
+                    Spero.emit('end');
                 });
                 
                 socket.on('connect', function() {
-                    console.log('spero: connected\n');
+                    Spero.emit('connect');
                 });
                 
                 socket.on('disconnect', function() {
-                    console.error('spero: disconnected\n');
+                    Spero.emit('disconnect');
                 });
             }
             
