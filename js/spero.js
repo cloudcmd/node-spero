@@ -80,11 +80,11 @@ var io, load, exec, join, Emitify, loadRemote;
                 },
                 
                 function(callback) {
-                    loadRemote.setPrefix(prefix)
-                        .load('socket', {
-                            name : 'io',
-                            noPrefix: true
-                        }, callback);
+                    loadRemote('socket', {
+                        name : 'io',
+                        prefix: prefix,
+                        noPrefix: true
+                    }, callback);
                 },
                 
                 function() {
