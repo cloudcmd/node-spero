@@ -38,6 +38,10 @@ var io, load, exec, join, Emitify, loadRemote;
             Progress.pause();
         };
         
+        Spero.continue = function() {
+            Progress.continue();
+        };
+        
         function loadAll(prefix, callback) {
             var scripts = [];
             
@@ -156,6 +160,10 @@ var io, load, exec, join, Emitify, loadRemote;
             
             this.pause       = function() {
                 socket.emit('pause');
+            };
+            
+            this.continue   = function() {
+                socket.emit('continue');
             };
             
             this.abort       = function() {
