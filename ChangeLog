@@ -1,3 +1,10 @@
+2015.05.29, v1.0.2
+
+fix:
+- (spero) add continue
+- (loadremote) pre overwrite
+
+
 2015.05.28, v1.0.1
 
 feature:
