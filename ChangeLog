@@ -1,3 +1,9 @@
+2015.05.31, v1.0.7
+
+fix:
+- (copy) no end when copy from/to root on windows
+
+
 2015.05.31, v1.0.6
 
 feature:
