@@ -1,3 +1,9 @@
+2015.06.04, v1.0.9
+
+fix:
+- (spero) no options.json when minify enabled
+
+
 2015.06.03, v1.0.8
 
 feature:
