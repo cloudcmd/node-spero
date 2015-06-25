@@ -70,8 +70,8 @@ app.use(spero({
 });
 
 spero.listen(socket, {
-    prefix: '/spero', /* default              */
-    root: '/',       /* string or function   */
+    prefix: '/spero',   /* default              */
+    root: '/',          /* string or function   */
 });
 ```
 
