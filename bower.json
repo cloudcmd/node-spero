@@ -20,6 +20,6 @@
   "dependencies": {
     "execon": "~1.2.0",
     "load": "~1.1.4",
-    "emitify": "~1.1.2"
+    "emitify": "~1.2.0"
   }
 }
