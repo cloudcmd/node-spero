@@ -59,10 +59,11 @@ var spero       = require('spero'),
     express     = require('express'),
     io          = require('socket.io'),
     app         = express(),
-    server      = http.createServer(app);
-
-socket          = io.listen(server),
-server.listen(port, ip);
+    port        = 1337,
+    server      = http.createServer(app),
+    socket      = io.listen(server);
+    
+server.listen(port);
 
 app.use(spero({
     minify: true,
@@ -73,10 +74,6 @@ spero.listen(socket, {
     prefix: '/spero',   /* default              */
     root: '/',          /* string or function   */
 });
-```
-
-```js
-
 ```
 
 ## License
