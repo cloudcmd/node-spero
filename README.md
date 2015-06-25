@@ -13,7 +13,7 @@ npm i spero --save
 Could be loaded from url `/spero/spero.js`.
 
 ```js
-var prefix = 'spero';
+var prefix = '/spero';
 
 /* could be one argument: callback */
 spero(prefix, function() {
@@ -70,7 +70,7 @@ app.use(spero({
 });
 
 spero.listen(socket, {
-    prefix: 'spero', /* default              */
+    prefix: '/spero', /* default              */
     root: '/',       /* string or function   */
 });
 ```
