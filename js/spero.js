@@ -18,8 +18,8 @@ var io, load, exec, join, Emitify, loadRemote;
             }
             
             loadAll(prefix, function() {
-                Progress                = new ProgressProto(prefix);
-                Object.setPrototypeOf(Spero, new Emitify());
+                Progress = new ProgressProto(prefix);
+                Object.setPrototypeOf(Spero, Emitify);
                 
                 if (typeof callback === 'function')
                     callback();
