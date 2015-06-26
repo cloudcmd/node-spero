@@ -1,3 +1,10 @@
+2015.06.26, v1.0.14
+
+fix:
+- (spero) Emitify -> Emitify()
+- docs(readme) pre: spero -> /spero
+
+
 2015.06.25, v1.0.13
 
 feature:
