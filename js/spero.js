@@ -61,9 +61,10 @@ var io, load, exec, join, Emitify, loadRemote;
         function loadFiles(prefix, callback) {
             exec.series([
                 function(callback) {
-                    var scripts = [
-                        '/js/loadremote.js'
-                    ];
+                    var scripts = [];
+                    
+                    if (!loadRemote)
+                        scripts.push('/js/loadremote.js');
                     
                     if (!load)
                         scripts.push('/modules/load/load.js');
