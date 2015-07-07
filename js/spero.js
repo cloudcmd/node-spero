@@ -61,23 +61,20 @@ var io, load, exec, join, Emitify, loadRemote;
         function loadFiles(prefix, callback) {
             exec.series([
                 function(callback) {
-                    var scripts = [];
-                    
-                    if (!loadRemote)
-                        scripts.push('/js/loadremote.js');
-                    
-                    if (!load)
-                        scripts.push('/modules/load/load.js');
-                    
-                    if (!join)
-                        scripts.push('/join/join.js');
-                    
-                    if (!Emitify)
-                        scripts.push('/modules/emitify/lib/emitify.js');
-                    
-                    scripts = scripts.map(function(name) {
-                        return prefix + name;
-                    });
+                    var obj     = {
+                            loadRemote  : '/js/loadremote.js',
+                            load        : '/modules/load/load.js',
+                            join        : '/join/join.js',
+                            Emitify     : '/modules/emitify/lib/emitify.js'
+                        },
+                        
+                        scripts = Object.keys(obj)
+                            .filter(function(name) {
+                                return !window[name];
+                            })
+                            .map(function(name) {
+                                return prefix + obj[name];
+                            });
                     
                     exec.if(!scripts.length, callback, function() {
                         loadScript(scripts, callback);
