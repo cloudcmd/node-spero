@@ -5,11 +5,13 @@
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
   ],
-  "description": "web editor",
-  "main": "bin/edward.js",
+  "description": "file copy emitter middleware",
+  "main": "lib/spero.js",
   "keywords": [
     "file",
-    "edit"
+    "copy",
+    "emitter",
+    "middleware"
   ],
   "license": "MIT",
   "private": true,
