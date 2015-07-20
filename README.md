@@ -16,7 +16,7 @@ Could be loaded from url `/spero/spero.js`.
 var prefix = '/spero';
 
 /* could be one argument: callback */
-spero(prefix, function() {
+spero(prefix, function(copier) {
     var from        = '/',
         to          = '/tmp',
         names       = [
@@ -28,8 +28,8 @@ spero(prefix, function() {
         
         end     = function() {
             console.log('end');
-            spero.removeListener('progress', progress);
-            spero.removeListener('end', end);
+            copier.removeListener('progress', progress);
+            copier.removeListener('end', end);
         },
     
     error   = function(data) {
@@ -37,16 +37,16 @@ spero(prefix, function() {
             is = confirm(msg);
         
         if (is)
-            spero.continue();
+            copier.continue();
         else
-            spero.abort();
+            copier.abort();
     };
     
-    spero(from, to, names);
+    copier(from, to, names);
     
-    spero.on('progress', progress);
-    spero.on('end', end);
-    spero.on('error', error);
+    copier.on('progress', progress);
+    copier.on('end', end);
+    copier.on('error', error);
 });
 
 ```
