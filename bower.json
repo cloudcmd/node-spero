@@ -1,6 +1,5 @@
 {
   "name": "spero",
-  "version": "1.3.1",
   "homepage": "https://github.com/coderaiser/node-spero",
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
@@ -26,3 +25,4 @@
     "emitify": "^2.1.0"
   }
 }
+
