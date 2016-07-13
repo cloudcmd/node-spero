@@ -67,7 +67,9 @@ server.listen(port);
 
 app.use(spero({
     minify: true,
-    online: true
+    online: true,
+    authCheck: function(socket, success) {
+    }
 });
 
 spero.listen(socket, {

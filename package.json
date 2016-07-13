@@ -4,7 +4,13 @@
   "description": "file copy emitter middleware",
   "main": "lib/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tape test/**/*.js",
+    "watch:test": "nodemon -w test -w lib --exec npm test",
+    "lint": "redrun lint:*",
+    "lint:eslint:client": "eslint --config .eslintrc-client lib --ignore-pattern lib/server",
+    "lint:eslint:server": "eslint lib test --ignore-pattern lib/client.js",
+    "coverage": "nyc npm test",
+    "report": "nyc report --reporter=text-lcov | coveralls",
     "bower": "bower"
   },
   "repository": {
@@ -30,6 +36,12 @@
     "mollify": "~1.0.4"
   },
   "devDependencies": {
-    "bower": "^1.5.2"
+    "bower": "^1.5.2",
+    "eslint": "^3.0.1",
+    "express": "^4.14.0",
+    "freeport": "^1.0.5",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8",
+    "tape": "^4.6.0"
   }
 }
