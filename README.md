@@ -1,4 +1,4 @@
-# Spero
+# Spero [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 
 File copy emitter middleware based on [socket.io](http://socket.io "Socket.io") and [copymitter](https://github.com/coderaiser/node-copymitter "Copymitter").
 
@@ -81,3 +81,13 @@ spero.listen(socket, {
 ## License
 
 MIT
+
+[NPMIMGURL]:                https://img.shields.io/npm/v/spero.svg?style=flat
+[DependencyStatusIMGURL]:   https://img.shields.io/gemnasium/coderaiser/node-spero.svg?style=flat
+[LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
+[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/node-spero/master.svg?style=flat
+[NPMURL]:                   https://npmjs.org/package/spero "npm"
+[DependencyStatusURL]:      https://gemnasium.com/coderaiser/node-spero "Dependency Status"
+[LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
+[BuildStatusURL]:           https://travis-ci.org/coderaiser/node-spero  "Build Status"
+
