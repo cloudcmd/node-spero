@@ -2,6 +2,7 @@
 
 const http = require('http');
 const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const test = require('tape');
 const freeport = require('freeport');
@@ -66,10 +67,13 @@ test('spero: options: prefix', (t) => {
 test('spero: options: root', (t) => {
     connect('/', {root: __dirname}, (socket, callback) => {
         socket.on('connect', () => {
-            socket.emit('copy', '.', String(Math.random()), ['spero.js']);
+            const name = String(Math.random());
+            const full = path.join(__dirname, name);
+            socket.emit('copy', '.', name, ['spero.js']);
             
             socket.on('err', (error) => {
                 t.ok(error, error);
+                fs.rmdirSync(full);
                 t.end();
                 callback();
             });
