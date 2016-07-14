@@ -1,58 +1,10 @@
 'use strict';
 
-const http = require('http');
 const path = require('path');
 const fs = require('fs');
-const express = require('express');
 const test = require('tape');
-const freeport = require('freeport');
-const io = require('socket.io');
-const ioClient = require('socket.io-client');
 const spero = require('..');
-
-const connect = (path, options, fn) => {
-    if (!path) {
-        throw Error('path could not be empty!');
-    } else if (!fn && !options) {
-        fn = path;
-        path = '';
-    } else if (!fn) {
-        fn = options;
-        options = null;
-    }
-    
-    path = path.replace(/^\/|\/$/g, '');
-    
-    if (!options || !options.prefix) {
-        path = 'spero';
-    } else {
-        const prefix = options.prefix || 'spero';
-        path = `${prefix}${!path ? '' : '/' + path}`;
-    }
-    
-    const app = express();
-    const server = http.createServer(app);
-    
-    app.use(spero(options));
-    spero.listen(io(server), options);
-        
-    freeport((error, port) => {
-        const ip = '127.0.0.1';
-        
-        if (options && !Object.keys(options).length)
-            options = undefined;
-        
-        server.listen(port, ip, () => {
-            const url = `http://127.0.0.1:${port}/${path}`;
-            const socket = ioClient(url);
-            
-            fn(socket, () => {
-                socket.destroy();
-                server.close();
-            });
-        });
-    });
-};
+const connect = require('./connect')('spero', spero);
 
 test('spero: options: prefix', (t) => {
     connect('/', {prefix: 'hello'}, (socket, callback) => {
