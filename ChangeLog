@@ -1,3 +1,9 @@
+2016.11.08, v1.5.2
+
+fix:
+- (client) accept: spero.on -> socket.on
+
+
 2016.10.26, v1.5.1
 
 fix:
