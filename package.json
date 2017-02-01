@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/coderaiser/node-spero",
   "dependencies": {
-    "copymitter": "~1.8.3",
+    "copymitter": "^2.0.0",
     "join-io": "~1.4.0",
     "mellow": "~2.0.0",
     "mollify": "~1.0.4"
