@@ -22,15 +22,15 @@
     "test",
     "tests"
   ],
-  "version": "2.1.1",
-  "_release": "2.1.1",
+  "version": "3.0.0",
+  "_release": "3.0.0",
   "_resolution": {
     "type": "version",
-    "tag": "v2.1.1",
-    "commit": "7a68d0c95c1568cc84c21b76398960ea40ec29ba"
+    "tag": "v3.0.0",
+    "commit": "6badee3e901c94b1d82a43af380afb3691a52956"
   },
   "_source": "https://github.com/coderaiser/emitify.git",
-  "_target": "^2.1.1",
+  "_target": "^3.0.0",
   "_originalSource": "emitify",
   "_direct": true
 }

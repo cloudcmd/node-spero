@@ -3,26 +3,16 @@
 module.exports = Emitify;
 
 function Emitify() {
-    if (this instanceof Emitify)
-        this._all = {};
-    else
+    if (!(this instanceof Emitify))
         return new Emitify();
+    
+    this._all = {};
 }
 
-Emitify.prototype._check = function(event, callback) {
-    var isTwo = arguments.length === 2;
+Emitify.prototype.on = function(event, callback) {
+    const funcs = this._all[event];
     
-    if (typeof event !== 'string')
-        throw Error('event should be string!');
-    
-    if (isTwo && typeof callback !== 'function')
-        throw Error('callback should be function!');
-};
-
-Emitify.prototype.on   = function(event, callback) {
-    var funcs = this._all[event];
-    
-    this._check(event, callback);
+    check(event, callback);
     
     if (funcs)
         funcs.push(callback);
@@ -35,10 +25,10 @@ Emitify.prototype.on   = function(event, callback) {
 Emitify.prototype.addListener =
 Emitify.prototype.on;
 
-Emitify.prototype.once  = function(event, callback) {
-    var self = this;
+Emitify.prototype.once = function(event, callback) {
+    const self = this;
     
-    self._check(event, callback);
+    check(event, callback);
     
     self.on(event, function fn() {
         callback.apply(null, arguments);
@@ -48,11 +38,11 @@ Emitify.prototype.once  = function(event, callback) {
     return this;
 };
 
-Emitify.prototype.off   = function(event, callback) {
-    var events  = this._all[event] || [],
-        index   = events.indexOf(callback);
+Emitify.prototype.off = function(event, callback) {
+    const events = this._all[event] || [];
+    let index = events.indexOf(callback);
     
-    this._check(event, callback);
+    check(event, callback);
     
     while (~index) {
         events.splice(index, 1);
@@ -62,29 +52,45 @@ Emitify.prototype.off   = function(event, callback) {
     return this;
 };
 
-Emitify.prototype.removeListener    =
+Emitify.prototype.removeListener =
 Emitify.prototype.off;
 
 Emitify.prototype.emit = function(event) {
-    var args    = [].slice.call(arguments, 1),
-        funcs   = this._all[event];
+    const args = [].slice.call(arguments, 1);
+    const funcs = this._all[event];
     
-    this._check(event);
+    checkEvent(event);
     
-    if (funcs)
-        funcs.forEach(function(fn) {
-            fn.apply(null, args);
-        });
-    else if (event === 'error')
+    if (!funcs && event === 'error')
         throw args[0];
+     
+    funcs.forEach((fn) => {
+        fn.apply(null, args);
+    });
     
     return this;
 };
 
 Emitify.prototype.removeAllListeners = function(event) {
-    this._check(event);
+    checkEvent(event);
+    
     this._all[event] = [];
     
     return this;
 };
+
+function checkEvent(event) {
+    if (typeof event !== 'string')
+        throw Error('event should be string!');
+}
+
+function checkFn(callback) {
+    if (typeof callback !== 'function')
+        throw Error('callback should be function!');
+}
+
+function check(event, callback) {
+    checkEvent(event);
+    checkFn(callback);
+}
 
