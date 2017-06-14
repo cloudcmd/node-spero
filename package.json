@@ -41,7 +41,7 @@
     "eslint": "^4.0.0",
     "express": "^4.14.0",
     "freeport": "^1.0.5",
-    "nyc": "^10.0.0",
+    "nyc": "^11.0.2",
     "redrun": "^5.0.1",
     "socket.io": "^2.0.1",
     "socket.io-client": "^2.0.1",
