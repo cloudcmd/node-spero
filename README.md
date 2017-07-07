@@ -75,6 +75,7 @@ spero.listen(socket, {
     root: '/',          /* string or function   */
 });
 ```
+
 ## Environments
 
 In old `node.js` environments that supports `es5` only, `dword` could be used with:
