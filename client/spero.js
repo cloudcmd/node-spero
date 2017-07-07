@@ -7,7 +7,7 @@ module.exports = (prefix, socketPath, callback) => {
     if (!callback) {
         if (!socketPath) {
             callback    = prefix;
-            prefix      = '/omnes';
+            prefix      = '/spero';
         } else {
             callback    = socketPath;
             socketPath  = '';
