@@ -13,33 +13,33 @@ npm i spero --save
 Could be loaded from url `/spero/spero.js`.
 
 ```js
-var prefix = '/spero';
+const prefix = '/spero';
 
 /* could be one argument: callback */
 spero(prefix, function(copier) {
-    var from        = '/',
-        to          = '/tmp',
-        names       = [
-            'bin'
-        ],
-        progress    = function(value) {
-            console.log('progress:', value);
-        },
-        
-        end     = function() {
-            console.log('end');
-            copier.removeListener('progress', progress);
-            copier.removeListener('end', end);
-        },
+    const from = '/';
+    const to = '/tmp';
+    const names = [
+        'bin'
+    ];
+    const progress = (value) => {
+        console.log('progress:', value);
+    };
     
-    error   = function(data) {
-        var msg = data + '\n Continue?',
-            is = confirm(msg);
+    const end = () => {
+        console.log('end');
+        copier.removeListener('progress', progress);
+        copier.removeListener('end', end);
+    };
+    
+    const error = (data) => {
+        const msg = data + '\n Continue?';
+        const is = confirm(msg);
         
         if (is)
-            copier.continue();
-        else
-            copier.abort();
+            return copier.continue();
+        
+        copier.abort();
     };
     
     copier(from, to, names);
@@ -48,25 +48,23 @@ spero(prefix, function(copier) {
     copier.on('end', end);
     copier.on('error', error);
 });
-
 ```
 
 ## Server
 
 ```js
-var spero       = require('spero'),
-    http        = require('http'),
-    express     = require('express'),
-    io          = require('socket.io'),
-    app         = express(),
-    port        = 1337,
-    server      = http.createServer(app),
-    socket      = io.listen(server);
-    
+const spero = require('spero');
+const http = require('http');
+const express = require('express');
+const io = require('socket.io');
+const app = express();
+const port = 1337;
+const server = http.createServer(app);
+const socket = io.listen(server);
+
 server.listen(port);
 
 app.use(spero({
-    minify: true,
     online: true,
     authCheck: function(socket, success) {
     }
@@ -76,6 +74,13 @@ spero.listen(socket, {
     prefix: '/spero',   /* default              */
     root: '/',          /* string or function   */
 });
+```
+## Environments
+
+In old `node.js` environments that supports `es5` only, `dword` could be used with:
+
+```js
+var spero = require('spero/legacy');
 ```
 
 ## License
