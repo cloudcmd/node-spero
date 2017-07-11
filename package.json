@@ -1,6 +1,6 @@
 {
   "name": "spero",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "file copy emitter middleware",
   "main": "server/index.js",
   "scripts": {
