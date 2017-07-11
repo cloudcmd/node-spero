@@ -12,7 +12,8 @@ const copy = require('./copy');
 const speroFn = currify(_speroFn);
 const isDev = process.env.NODE_ENV === 'development';
 
-module.exports = (options = {}) => {
+module.exports = (options) => {
+    options = options || {};
     const router = Router();
     const prefix = options.prefix || '/spero';
     
