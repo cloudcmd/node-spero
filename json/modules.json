@@ -1,6 +1,0 @@
-[{
-    "name": "socket",
-    "version": "1.7.3",
-    "local": "/socket.io/socket.io.js",
-    "remote": "//cdnjs.cloudflare.com/ajax/libs/socket.io/{{ version }}/socket.io.js"
-}]
