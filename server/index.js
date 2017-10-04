@@ -47,7 +47,7 @@ function _speroFn(options, req, res, next) {
     
     req.url = req.url.replace(prefix, '');
     
-    if (/^\/spero\.js(\.map)?$/.test(req.url))
+    if (/^\/(spero|0)\.js(\.map)?$/.test(req.url))
         req.url = '/dist' + req.url;
     
     if (isDev)

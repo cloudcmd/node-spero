@@ -1,7 +1,6 @@
 'use strict';
 
 const Emitify = require('emitify/legacy');
-const io = require('socket.io-client/dist/socket.io');
 
 module.exports = (prefix, socketPath, callback) => {
     if (!callback) {
@@ -18,8 +17,19 @@ module.exports = (prefix, socketPath, callback) => {
     
     init();
     
-    if (typeof callback === 'function')
+    loadSocket((io) => {
+        window.io = window.io || io;
         callback(Spero(prefix, socketPath));
+    });
+}
+
+function loadSocket(fn) {
+    const {io} = window;
+    
+    if (io)
+        return fn(io);
+    
+    import('socket.io-client').then(fn);
 }
 
 function Spero(prefix, socketPath) {
