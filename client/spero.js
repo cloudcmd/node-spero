@@ -1,5 +1,7 @@
 'use strict';
 
+/* global io */
+
 const Emitify = require('emitify/legacy');
 
 module.exports = (prefix, socketPath, callback) => {
