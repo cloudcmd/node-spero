@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/coderaiser/node-spero.git"
+    "url": "git://github.com/cloudcmd/node-spero.git"
   },
   "keywords": [
     "file",
@@ -39,9 +39,9 @@
   "author": "coderaiser <mnemonic.enemy@gmail.com> (http://coderaiser.github.io/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/coderaiser/node-spero/issues"
+    "url": "https://github.com/cloudcmd/node-spero/issues"
   },
-  "homepage": "https://github.com/coderaiser/node-spero",
+  "homepage": "https://github.com/cloudcmd/node-spero",
   "dependencies": {
     "copymitter": "^2.0.0",
     "currify": "^2.0.4",
